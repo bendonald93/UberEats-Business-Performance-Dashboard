@@ -1,5 +1,5 @@
 # 🛵 UberEats Interactive Business & Performance Dashboard
-🌐 **[Auf Deutsch übersetzen (Translate to German)](https://github.com/bendonald93/UberEats-Business-Performance-Dashboard**)
+🌐 **[Auf Deutsch übersetzen (Translate to German)](https://github.com/bendonald93/UberEats-Business-Performance-Dashboard)**
 
 An end-to-end Power BI analytics solution analyzing 5,000 UberEats orders to deliver actionable insights on revenue drivers, delivery efficiency, and order completion performance.
 
