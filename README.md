@@ -4,7 +4,7 @@ An end-to-end Power BI analytics solution analyzing 5,000 UberEats orders to del
 
 ## 📊 Executive Overview
 
-![Dashboard Preview](screenshots/overview.png)
+![Dashboard Preview](overview.png)
 
 ### Key Metrics Tracked
 * **Total Revenue & Completed Revenue**: Financial breakdown across order statuses.
@@ -33,3 +33,10 @@ DIVIDE (
 
 // Average Delivery Time
 Avg Delivery Time (mins) = AVERAGE ( 'ubereats_data'[delivery_time_mins] )
+```
+## 💡 Key Business Insights
+
+* **Revenue Drivers**: Chicago and Atlanta led overall sales volume, with **Burgers** ($32.6k) and **Desserts** ($31.8k) generating the highest revenue across all food categories.
+* **Fulfillment Efficiency**: The overall order completion rate stood at **59.7%**, with **20.3% refunded** and **20.0% cancelled**, highlighting a key operational opportunity to reduce order churn.
+* **Delivery Time vs. Satisfaction**: Delivery times averaged **35 minutes** across all cities. Orders delivered under **30 minutes** maintained significantly higher average ratings (>4.2/5.0).
+* **Peak Ordering Windows**: Order volume peaked during **Evening** and **Afternoon** hours, representing over **55%** of total daily revenue.
