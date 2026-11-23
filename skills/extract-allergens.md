@@ -1,6 +1,6 @@
 # Extract EU allergens
 
-Prompt template. Given a German ingredient list (`Zutaten`), return only the EU allergens that are present.
+Prompt template. Given a German ingredient list (`Zutaten`), return the EU allergens present as ingredients or named in a “kann Spuren von…” (may contain traces) clause.
 
 ## Input
 
@@ -39,14 +39,15 @@ Each item must be exactly one of these canonical ids, in this order, with duplic
 13. lupin
 14. molluscs
 
-If none of the 14 are present as ingredients, return exactly:
+If none of the 14 are present as ingredients or as possible traces, return exactly:
 ["NONE"]
 
 Rules:
 - Match German names, common synonyms, and parenthetical declarations (for example "Weizenmehl (Weizen)", "Magermilchpulver", "Sojalecithin").
 - Treat bold, asterisks, and capitalisation as emphasis only. They do not change the allergen.
-- Count an allergen only when it is an ingredient of the product.
-- Ignore precautionary wording such as "kann Spuren von … enthalten", "kann … enthalten", and "hergestellt in einem Betrieb, der … verarbeitet". If those are the only allergen mentions, return ["NONE"].
+- Count an allergen when it is an ingredient of the product or when it is named in a precautionary traces clause such as "kann Spuren von … enthalten", "kann … enthalten", or "hergestellt in einem Betrieb, der … verarbeitet".
+- Include trace allergens in the same array as ingredient allergens. Keep the canonical order above and remove duplicates, including when the same allergen appears both as an ingredient and as a trace.
+- If the text names no Annex II allergen as an ingredient and no Annex II allergen in a traces clause, return ["NONE"].
 - Do not invent allergens that are not supported by the text.
 - These are not Annex II allergens on their own: Kokosnuss, Pinienkerne, Kastanie, Muskat, Mais, Reis, Buchweizen, Glucose, Dextrose, Maltodextrin (unless the source cereal is a gluten cereal, e.g. "Weizen"), Sonnenblumenlecithin, Rapsöl, Kakao.
 
@@ -73,8 +74,14 @@ Zutaten: Wasser, Weizenmehl, Magermilchpulver, Salz.
 ["cereals_containing_gluten","milk"]
 
 Zutaten: Tomaten, Zwiebeln, Olivenöl, Salz. Kann Spuren von Senf enthalten.
-["NONE"]
+["mustard"]
 
 Zutaten: Zucker, Mandeln (28%), Hühnereigelb, Sojalecithin.
 ["eggs","soybeans","nuts"]
+
+Zutaten: Weizenmehl, Zucker, Butter (Milch), Hühnereier. Kann Spuren von Erdnüssen enthalten.
+["cereals_containing_gluten","eggs","peanuts","milk"]
+
+Zutaten: Tomaten, Zwiebeln, Olivenöl, Salz.
+["NONE"]
 ```
